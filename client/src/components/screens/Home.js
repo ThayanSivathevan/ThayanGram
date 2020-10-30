@@ -148,9 +148,10 @@ const Home = () => {
                     return (
                         <div className="card home-card" key={item._id}>
                             <h5 >
+                            <Link style={{ fontWeight: "750" }} to={item.postedBy._id !== state._id ? "/profile/" + item.postedBy._id : "/profile"} >
                                 <img  alt="profile pic" style={{ border: "5px solid #555",margin: "5px", width: "50px", height: "50px", borderRadius: "80px" }}
                                     src={item.postedBy.url} />
-                                <Link style={{ fontWeight: "750" }} to={item.postedBy._id !== state._id ? "/profile/" + item.postedBy._id : "/profile"} >{item.postedBy.name}</Link>
+                               {item.postedBy.name}</Link>
                                 {item.postedBy._id === state._id && <i onClick={() => deletePost(item._id)} className="material-icons" style={{ color: "black", float: "right" }}>delete</i>
                                 }</h5>
 
