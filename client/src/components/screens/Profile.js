@@ -20,6 +20,7 @@ const Profile = () => {
                 <Link to="/changeProfilePic">
                     <img alt="profile pic" style={{ width: "160px", height: "160px", borderRadius: "80px" }}
                         src={state?state.url:""} />
+                    <button className="btn waves-effect waves-light #4a148c purple darken-4">Change Profile Pic</button>
                 </Link>
                 </div>
                 <div>
