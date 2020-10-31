@@ -6,15 +6,17 @@ const UserProfile = () => {
     const [showfollow, setShowFollow] = useState(true)
     const [userProfile, setProfile] = useState(null)
     const { userid } = useParams()
-    console.log(userid)
     useEffect(() => {
+        console.log(userProfile)
+        const user= JSON.parse(localStorage.getItem("user"))
+        dispatch({type:"USER",payload:user})
         fetch('/user/' + userid, {
             headers: {
                 "Authorization": "Bearer " + localStorage.getItem("jwt")
             }
         }).then(res => res.json()).then(result => {
-
             setProfile(result)
+        
             setShowFollow(result.user.followers.includes(state._id) ? false : true)
         })
     }, [])

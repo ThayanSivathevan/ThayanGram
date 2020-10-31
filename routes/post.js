@@ -3,9 +3,22 @@ const router =express.Router()
 const mongoose= require('mongoose')
 const requireLogin=require('../middleware/requireLogin')
 const Post = mongoose.model("Post")
+
+router.get('/post',requireLogin,(req,res)=>{
+	Post.findOne(req.body.postId).populate("postedBy","_id name url")
+	.populate("comments.postedBy","_id name")
+	.then(post=>{
+		console.log(post)
+		res.json({post})
+	}).catch(err=>{
+		console.log(err)
+	})
+})
 router.get('/allpost',requireLogin,(req,res)=>{
 	Post.find().populate("postedBy","_id name url")
-	.populate("comments.postedBy","_id name").then(posts=>{
+	.populate("comments.postedBy","_id name")
+	.sort('-createdAt')
+	.then(posts=>{
 		res.json({posts})
 	}).catch(err=>{
 		console.log(err)
@@ -15,7 +28,9 @@ router.get('/getsubpost',requireLogin,(req,res)=>{
 	//if postedBy in following
 	Post.find({postedBy:{$in:req.user.following}})
 	.populate("postedBy","_id name url")
-	.populate("comments.postedBy","_id name url").then(posts=>{
+	.populate("comments.postedBy","_id name url")
+	.sort('-createdAt')
+	.then(posts=>{
 		res.json({posts})
 	}).catch(err=>{
 		console.log(err)
