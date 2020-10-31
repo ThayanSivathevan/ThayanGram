@@ -32,7 +32,27 @@ const Navbar = () => {
               Log out
                 </button>
           </Link></li>
+          <div id="modal1" className="modal" ref={searchModal} style={{ color: "black" }}>
+            <div className="modal-content input-field">
+              <input value={search} onChange={(e) => fetchUsers(e.target.value)} type="text" placeholder="search" />
+              <ul className="collection">
+                {userDetails.map(item => {
+                  return <Link to={item._id !== state._id ? "/middle/" + item._id : "/profile"}
+                    onClick={() => {
+                      M.Modal.getInstance(searchModal.current).close()
+                      setSearch('')
+                    }
+                    }><li className="collection-item">{item.name + " " + item.email}</li></Link>
+                })}
+              </ul>
+
+            </div>
+            <div className="modal-footer">
+              <button className="modal-close waves-effect waves-green btn-flat" onClick={() => setSearch('')}>Close</button>
+            </div>
+          </div>
         </div>
+
       ]
     }
     else {
@@ -74,24 +94,6 @@ const Navbar = () => {
         <ul id="nav-mobile" className="right">
           {renderList()}
         </ul>
-      </div>
-      <div id="modal1" className="modal" ref={searchModal} style={{ color: "black" }}>
-        <div className="modal-content input-field">
-          <input value={search} onChange={(e) => fetchUsers(e.target.value)} type="text" placeholder="search" />
-          <ul className="collection">
-            {userDetails.map(item => {
-              return <Link to={item._id !== state._id ? "/middle/" + item._id : "/profile"} 
-              onClick={()=>{
-                M.Modal.getInstance(searchModal.current).close()
-                setSearch('')}
-              }><li className="collection-item">{item.name + " " + item.email}</li></Link>
-            })}
-          </ul>
-
-        </div>
-        <div className="modal-footer">
-          <button className="modal-close waves-effect waves-green btn-flat" onClick={()=>setSearch('')}>Close</button>
-        </div>
       </div>
     </nav>
   )
