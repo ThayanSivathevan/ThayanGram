@@ -103,7 +103,7 @@ router.post('/reset-password',(req,res)=>{
 					subject:"Forgot Password",
 					html:`
 					<p>You requested a password reset
-					<h5>click on this link <a href=${RESET}"/reset/${token}">link</a> to reset password</h5>
+					<h5>click on this link <a href="${RESET}/reset/${token}">link</a> to reset password</h5>
 					`
 				})
 				res.json({message:"check your email"})
