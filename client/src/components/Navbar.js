@@ -32,6 +32,7 @@ const Navbar = () => {
               Log out
                 </button>
           </Link></li>
+          {renderModal()}
         </div>
       ]
     }
@@ -95,7 +96,6 @@ const Navbar = () => {
           {renderList()}
         </ul>
       </div>
-        {renderModal()}
     </nav>
   )
 }
