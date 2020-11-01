@@ -19,7 +19,7 @@ const NavBar = ()=>{
             <li key="3"><Link to="/create">Create Post</Link></li>,
             <li key="4"><Link to="/myHome">My following Posts</Link></li>,
             <li  key="5">
-             <button className="btn #c62828 red darken-3"
+             <button className="btn #4a148c purple darken-4"
             onClick={()=>{
               localStorage.clear()
               dispatch({type:"CLEAR"})
@@ -67,7 +67,7 @@ const NavBar = ()=>{
           </ul>
         </div>
         <div id="modal1" class="modal" ref={searchModal} style={{color:"black"}}>
-          <div className="modal-content">
+          <div className="modal-content input-field">
           <input
             type="text"
             placeholder="search users"
